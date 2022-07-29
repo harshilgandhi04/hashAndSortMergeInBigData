@@ -1,12 +1,26 @@
 # Implementation of Hash Join and Sort Merge Join Algorithm for SPARQL Query Processing
 
-The task is to implement two most popular join algorithms, namely Hash join and Sort-merge join
-algorithms for a specific SPARQL query over an RDF dataset. The Waterloo SPARQL Diversity Test Suite
-WatDiv dataset from University of Waterloo https://dsg.uwaterloo.ca/watdiv/ consists of diverse
-RDF triple stores in different size. Based on two selected datasets from it, the SPARQL query of the form:
+Join Algorithms
+Implemented Join algorithms are used on Waterloo SPARQL Diversity Test Suite (WatDiv) dataset. Dateset is being vertical partitioned into tables, that lately are joined to the specific SPARQL query. The project implements Join Algorithms:
+
+Hash Join
+Partitioned Parallel Hash Join
+Sort-Merge Join
+
+One example of SPARQL query on WatDiv dataset is:
+
 (?a)---follows--->(?b)---friendOf--->(?c)---likes--->(?d)---hasReview--->(?e)
-is to be evaluated. In the query, (?a), (?b), (?c), (?d), (?e) are variables, and follows, friendOf,
-likes, hasReview are properties. The answer of the query is the list of mapped values of all the variables
-(?a), (?b), (?c), (?d), (?e).
-The dataset consists of two triple WatDiv triple stores, one with the size of 100 thousand, and another
-with 10 million triples
+In the query, (?a), (?b), (?c), (?d), (?e) are variables, and follows, friendOf, likes, hasReview are properties. The answer of the query is the list of mapped values of all the variables (?a), (?b), (?c), (?d), (?e).
+
+Obviously, above query can be expressed in the form of SQL given the data set yield by vertically partitioned approach. The corresponding SQL expression is as follows:
+
+SELECT follows.subject, follows.object, friendOf.object, likes.object, hasReview.object
+  FROM follows, friendOf, likes, hasReview
+  WHERE follows.object = friendOf.subject
+        AND friendOf.object = likes.subject
+        AND likes.object = hasReview.subject
+The query in the form of relational algebra is as follows:
+
+follows join friendOf on follows.object=friendOf.subject
+friendOf join likes on friendOf.object=likes.subject
+likes join hasReview on likes.object=hasReview.subject
