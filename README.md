@@ -1,4 +1,4 @@
-## This repository contains Implementation of Join Algorithm for SPARQL Query Processing
+## Implementation of Join Algorithm for SPARQL Query Processing
 
 ### Join Algorithms
 Implemented Join algorithms are used on Waterloo SPARQL Diversity Test Suite (WatDiv) dataset. 
