@@ -1,4 +1,4 @@
-Implementation of Hash Join and Sort Merge Join Algorithm for SPARQL Query Processing and doing time analysis
+# Implementation of Hash Join and Sort Merge Join Algorithm for SPARQL Query Processing
 
 The task is to implement two most popular join algorithms, namely Hash join and Sort-merge join
 algorithms for a specific SPARQL query over an RDF dataset. The Waterloo SPARQL Diversity Test Suite
